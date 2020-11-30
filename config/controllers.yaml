@@ -1,0 +1,10 @@
+trinamic:
+    state:
+      type: joint_state_controller/JointStateController
+      joint: servo1
+      publish_rate: 50
+    
+    position:
+      type: "position_controllers/JointTrajectoryController"
+      joints: 
+        - servo1

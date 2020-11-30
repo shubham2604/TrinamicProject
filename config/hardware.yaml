@@ -1,0 +1,6 @@
+ROBOT:
+  hardware_interface:
+     loop_hz: 10 # hz
+     joints:
+       - servo1
+

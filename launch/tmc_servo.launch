@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+    
+  <rosparam file="$(find tmc4761)/config/controllers.yaml" command="load"/>
+   
+  <arg name="model" default="$(find tmc4761)/urdf/trinamic_urdf.urdf.xacro"/>
+  <arg name="gui" default="true" />
+  
+  <param name="robot_description" command="$(find xacro)/xacro.py $(arg model)" />
+  <param name="use_gui" value="$(arg gui)"/>
+  
+  <node name="trinamic_interface" pkg="tmc4761" type="tmc" output="screen"/>
+      
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" >
+  </node>
+    
+  <node name="rviz" pkg="rviz" type="rviz"/>
+    
+
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen"
+        args="
+        	/trinamic/state
+          /trinamic/position
+        "/>
+</launch>
